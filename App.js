@@ -1,21 +1,21 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import {Provider as PaperProvider} from "react-native-paper";
+import { StatusBar } from 'react-native';
+import { StackRoutes } from './src/routes/StackRoutes';
+import { GlobalizeProvider } from 'react-native-globalize';
+import { loadCldr } from 'react-native-globalize';
+loadCldr(require('react-native-globalize/locale-data/en'));
 
-export default function App() {
+function App() {
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <GlobalizeProvider locale="en" currency="USD">
+      <PaperProvider>
+        <StatusBar/>
+        <StackRoutes /> 
+      </PaperProvider>
+    </GlobalizeProvider>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
